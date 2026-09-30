@@ -35,7 +35,7 @@ public class Calculadora extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtnota2 = new javax.swing.JTextField();
         btnevaluar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        lblResultado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
@@ -54,6 +54,7 @@ public class Calculadora extends javax.swing.JFrame {
         jLabel3.setText("Escriba la nota de Matemáticas");
 
         btnevaluar.setText("Evaluar");
+        btnevaluar.addActionListener(this::btnevaluarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,7 +64,7 @@ public class Calculadora extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(39, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -98,7 +99,7 @@ public class Calculadora extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtnota2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(118, Short.MAX_VALUE))
         );
 
@@ -108,6 +109,22 @@ public class Calculadora extends javax.swing.JFrame {
     private void txtnota1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnota1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnota1ActionPerformed
+
+    private void btnevaluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnevaluarActionPerformed
+        // TODO add your handling code here:
+        try {
+            String nombre =txtnombre.getText().trim();
+            double nota1 = Double.parseDouble(txtnota1.getText());
+            double nota2 = Double.parseDouble(txtnota1.getText());
+            modelo.Estudiante estudiante = new modelo.Estudiante (nombre, nota1, nota2);
+            String mensaje = String.format("Estudiante %s | Definitiva %.2f(%s)", estudiante.getNombre(), estudiante.calcularDefinitiva(), estudiante.obtenerResultado());
+            lblResultado.setText(mensaje);
+        }
+        catch (NumberFormatException e){
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingresa valores númericos válidos",
+            "Error de formato", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+    }//GEN-LAST:event_btnevaluarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,7 +156,7 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblResultado;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txtnota1;
     private javax.swing.JTextField txtnota2;
